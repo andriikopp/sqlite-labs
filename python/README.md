@@ -1,9 +1,9 @@
 # SQLite with Python
 
-- [Lab 1](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-1)
-- [Lab 2](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-2)
+- [Lab 1. Learning essentials of DBMS.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-1)
+- [Lab 2. Basic data manipulation commands of SQL.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-2)
 
-## Lab 1
+## Lab 1. Learning essentials of DBMS.
 
 - Create a database. See example below:
 
@@ -209,7 +209,7 @@ conn.execute("INSERT INTO customer_order (customer_id, product, amount, price) \
  VALUES (3, 'PLASTER coat hanger', 3, 49.99)")
 ```
 
-## Lab 2
+## Lab 2. Basic data manipulation commands of SQL.
 
 ### SELECT SQL command. Data processing using SELECT queries.
 
