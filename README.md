@@ -19,7 +19,7 @@ For software engineering and computer science students.
 
 **Frontend**
 
-- [Lab 4. Display database records on web pages.](https://github.com/andriikopp/sqlite-labs#lab-4-display-database-records-on-web-pages) (*Python, Flask, CORS, HTML, Bootstrap, JavaScript, axios.js, Vue.js*)
+- [Lab 4. Display database records on web pages.](https://github.com/andriikopp/sqlite-labs#lab-4-display-database-records-on-web-pages) (*Python, Flask, HTML, Bootstrap, JavaScript, axios.js, Vue.js*)
 
 **Other languages + SQLite**
 
