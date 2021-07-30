@@ -1,33 +1,14 @@
 # SQLite with Python
 
+- [Lab 0. Data modeling as code.]()
 - [Lab 1. Learning essentials of DBMS.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-1-learning-essentials-of-dbms)
 - [Lab 2. Basic data manipulation commands of SQL.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-2-basic-data-manipulation-commands-of-sql)
 
-## Lab 1. Learning essentials of DBMS.
-
-- Create a database. See example below:
-
-```python
-# import sqlite3 python module
-
-import sqlite3
-
-
-# --- CONNECT TO A DB
-
-# if the database does not exist, then it will be created
-# and a database object will be returned
-
-conn = sqlite3.connect("lab.db")
-```
-
-### Problem description
+## Problem description
 
 *Some enterprise purchases products from various suppliers (both legal en-tities and individual entrepreneurs). Purchasing is performed using batches and formalized as supply contracts. Each supply contract has unique number and might be concluded with a single supplier. Documents for each contract include product name, supplied amount, and price (in UAH).*
 
-### Implementation steps
-
-- Create database tables:
+- The following entities could be used to describe the problem domain:
 
 **Suppliers**
 
@@ -74,7 +55,63 @@ conn = sqlite3.connect("lab.db")
 | AmountNumber   | INT       |            | Batch size (items)      |
 | PricePerItem   | DECIMAL   | 8,2        | Price per item (in UAH) |
 
-See example below:
+## Lab 0. Data modeling as code.
+
+- Get familiar with the PlantUML [Entity-Relationship (ER) diagram](https://plantuml.com/class-diagram) syntax.
+- Build the data model of entities mentioned above using the PlantUML ER diagram [here](http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000).
+
+See the example below:
+
+```java
+@startuml
+entity Student {
+   * StudentID
+   FullName
+   BirthDate
+   EnrollmentDate
+}
+
+entity Course {
+   * StudentID
+   * CourseName
+   Credits
+   Hours
+   Score
+}
+
+Student |o--o{ Course
+@enduml
+```
+
+Sample output:
+
+![ER-model](http://www.plantuml.com/plantuml/png/SoWkIImgAStDuKhDAyaigLG8BYbD0J8LghaK51IqO5nF5n3NhJGdnoynDnN4TieiAibmIIm1SrppYl9pSdA12i4YjLmmqvppIukAKx4QfWMLX1deN9IQabbI369w02N0ZE3a_2AmSJ1NrUJhwkPNGtLoEQJcfG2T3W00)
+
+## Lab 1. Learning essentials of DBMS.
+
+- Create a database.
+
+See the example below:
+
+```python
+# import sqlite3 python module
+
+import sqlite3
+
+
+# --- CONNECT TO A DB
+
+# if the database does not exist, then it will be created
+# and a database object will be returned
+
+conn = sqlite3.connect("lab.db")
+```
+
+### Implementation steps
+
+- Create required database tables (see the entities mentioned above).
+
+See the example below:
 
 ```python
 # --- CREATE TABLES
@@ -104,7 +141,7 @@ conn.execute('''
 ''')
 ```
 
-- Create records in a database tables:
+- Create records in a database tables.
 
 **Suppliers**
 
@@ -174,7 +211,7 @@ conn.execute('''
 | 7              | PC            | 15     | 1234.56      |
 | 7              | Display       | 22     | 389.75       |
 
-See example below:
+See the example below:
 
 ```python
 # --- INSERT RECORDS
@@ -232,7 +269,7 @@ Create following queries:
 - Create a list of products delivered by the suppliers 1 and 2 (“Interfruit” LLC).
 - Create a list of products supplied more than once.
 
-See example below:
+See the example below:
 
 ```python
 # --- SELECT RECORDS
@@ -261,7 +298,7 @@ for row in cursor:
 - Increase amount of each product delivered by the supplier 1 by 10.
 - Delete all “empty” contracts (with no records about supplied products).
 
-See example below:
+See the example below:
 
 ```python
 # --- UPDATE RECORDS
@@ -322,7 +359,7 @@ for row in cursor:
 
 ### Finish the work.
 
-See example below:
+See the example below:
 
 ```python
 # --- FINISH THE WORK
