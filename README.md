@@ -4,7 +4,7 @@ For software engineering and computer science students.
 
 *Working examples are given in this repository as reference materials.*
 
-- [Lab 0. Data modeling as code](https://github.com/andriikopp/sqlite-labs#lab-0-data-modeling-as-code) (*PlantUML, Entity-Relationship modeling*)
+- [Lab 0. Data modeling as code.](https://github.com/andriikopp/sqlite-labs#lab-0-data-modeling-as-code) (*PlantUML, Entity-Relationship modeling*)
 - [Lab 1. Learning essentials of DBMS.](https://github.com/andriikopp/sqlite-labs#lab-1-learning-essentials-of-dbms) (*Python, SQLite, DDL SQL*)
 - [Lab 2. Basic data manipulation commands of SQL.](https://github.com/andriikopp/sqlite-labs#lab-2-basic-data-manipulation-commands-of-sql) (*Python, SQLite, DML SQL*)
 - [Lab 3. Create simple database Web API.](https://github.com/andriikopp/sqlite-labs#lab-3-create-simple-database-web-api) (*Python, Flask, SQLite, DML SQL, JSON*)
