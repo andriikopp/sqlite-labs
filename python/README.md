@@ -4,7 +4,7 @@
 - [Lab 1. Learning essentials of DBMS.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-1-learning-essentials-of-dbms)
 - [Lab 2. Basic data manipulation commands of SQL.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-2-basic-data-manipulation-commands-of-sql)
 
-## Problem description
+## Problem description.
 
 *Some enterprise purchases products from various suppliers (both legal en-tities and individual entrepreneurs). Purchasing is performed using batches and formalized as supply contracts. Each supply contract has unique number and might be concluded with a single supplier. Documents for each contract include product name, supplied amount, and price (in UAH).*
 
@@ -107,7 +107,7 @@ import sqlite3
 conn = sqlite3.connect("lab.db")
 ```
 
-### Implementation steps
+### Implementation.
 
 - Create required database tables (see the entities mentioned above).
 
@@ -373,3 +373,103 @@ conn.commit()
 
 conn.close()
 ```
+
+## Lab 3. Create simple database Web API.
+
+### Preparation.
+
+- Install Flask web development framework for Python:
+
+```shell
+pip install Flask
+```
+
+- Create new Python script with basic Flask routing.
+
+See the example below:
+
+```python
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
+
+
+if __name__ == "__main__":
+    app.run()
+```
+
+- Go to ```http://127.0.0.1:5000/``` to check that everything works fine. The web page with only a "Hello, World!" message is expected.
+
+### Experimenting with Flask.
+
+- Create the API endpoint to ask for the **1st** SQL SELECT query written before - *Print a list of products deliveredby the supplier 1 (Ivanov I.I. PE) for the contract 1*.
+
+See the example below:
+
+```python
+from flask import Flask
+from flask import jsonify
+
+import sqlite3
+
+
+app = Flask(__name__)
+
+
+@app.route("/orders")
+def orders():
+    conn = sqlite3.connect("lab.db")
+
+    cursor = conn.execute('''
+        SELECT 
+            name, address, product, amount, price, (amount * price)
+        FROM 
+            customer INNER JOIN customer_order 
+                ON customer.id = customer_order.customer_id
+        ORDER BY 
+            price
+    ''')
+
+    response = []
+
+    for row in cursor:
+        response.append(row)
+
+    return jsonify(response)
+
+
+if __name__ == "__main__":
+    app.run()
+```
+
+When ```http://127.0.0.1:5000/orders``` visited, the following JSON response is expected:
+
+```json
+[["Esther Q. Harris","2690 Central Avenue Rochelle Park, NJ 07662","CERAMIC fork",10,2.99,29.900000000000002],["Jennie M. Burns","4007 Poplar Street Tinley Park, IL 60477","FLEXIBLE mail sorter",4,29.99,119.96],["Charles M. Smith","4166 Stuart Street Gibsonia, PA 15044","PLASTER coat hanger",3,49.99,149.97],["Jennie M. Burns","4007 Poplar Street Tinley Park, IL 60477","FABRIC bike seat",1,199.99,199.99]]
+```
+
+### Implementation.
+
+Create and verify API endpoints for all of the previously written SQL SELECT queries:
+
+- Print a list of products deliveredby the supplier 1 (Ivanov I.I. PE) for the contract 1.
+- Print a list of products delivered by supplier 1 (Ivanov I.I. PE) between 9/1/1999 and 9/12/1999 (using “mm/dd/yyyy” dateformat).
+- Print a list of products supplied in September of 1999 with supplier name and supply date.
+- Print a list of contracts (number, date), total amount of the sup-plied products and total price for each contract (multiply and sum amount and price for each contract). The list should be sorted by contract numbers (ascending).
+- Print a list of contracts (number, date) with total price for each contract. The list should be sorted by total price for each contract. Records for which contract number is greater than 3 should be excluded from query results.
+- Print information about the largestproduct batch among allcon-tracts. Include information aboutsupplier, contract number, and date.
+- Print a list of suppliers (name and ID) that have not concluded any contracts.
+- Print a list of supplied product names with the average price per item (regardless of supplier).
+- Print a list of products (name, amount andprice, supplier) for which price per item is greater than average.
+- Print information about top five expensive products (name, price per item, supplier).
+- For each day of September 1999 define price of products delivered by each supplier (include only delivery days).
+- Create a list of contracts (only numbers), total amount of the supplied products, and total price for each contract. Print full names (last name, first name, and second name) of suppliers that are private entrepreneurs, as well as tax numbers of legal entities.
+- Define amounts of eachdeliveredproductbyeach supplier.
+- Print a list of contracts (number, date) and total price for each contract. The list should be sorted by total price for each contract. Exclude records for which the contract number is greater than a given value from the query result.
+- Create a list of products delivered by the suppliers 1 and 2 (“Interfruit” LLC).
+- Create a list of products supplied more than once.
