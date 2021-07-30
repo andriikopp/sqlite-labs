@@ -24,7 +24,7 @@ For software engineering and computer science students.
 **Other languages + SQLite**
 
 - [Lab 5. Use databases in PHP.](https://github.com/andriikopp/sqlite-labs#lab-5-use-databases-in-php) (*PHP, OOP, PDO, SQLite, HTML, Bootstrap, JavaScript, axios.js, Vue.js*)
-- [Lab 6. Use databases in NodeJS.](https://github.com/andriikopp/sqlite-labs#lab-5-use-databases-in-nodejs) (*NodeJS, SQLite, express, HTML, Bootstrap, JavaScript, axios.js, Vue.js*)
+- [Lab 6. Use databases in NodeJS.](https://github.com/andriikopp/sqlite-labs#lab-6-use-databases-in-nodejs) (*NodeJS, SQLite, express, HTML, Bootstrap, JavaScript, axios.js, Vue.js*)
 
 #### Report requirements:
 
