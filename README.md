@@ -4,6 +4,10 @@ For software engineering and computer science students.
 
 This set of laboratory works gives students basic understanding of the full lifecycle of database-driven applications from data modeling and database design to backend and frontend components development using demanding technologies, such as SQL, Python, PHP, NodeJS, HTML, JavaScript, Bootstrap, OOP, API, JSON, axios.js, Vue.js, and related concepts and tools.
 
+After completing this practice assignments, students are expected to be able to develop and maintain small- and medium-size database-driven web sites and web applications.
+
+**Next steps:** learn MySQL and MongoDB, develop full-size database-driven web-application with [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations, roles, and authentication.
+
 *Working examples are given in this repository as reference materials.*
 
 **Data Modeling**
