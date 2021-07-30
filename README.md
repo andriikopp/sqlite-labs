@@ -34,7 +34,7 @@ After completing this practice assignments, students are expected to be able to 
 
 **Data visualization**
 
-- [Lab 7. Append web pages with data visualizations.]() (*HTML, Bootstrap, JavaScript, JSON, axios.js, Vue.js, QuickChart*)
+- [Lab 7. Append web pages with data visualizations.](https://github.com/andriikopp/sqlite-labs#lab-7-append-web-pages-with-data-visualizations) (*HTML, Bootstrap, JavaScript, JSON, axios.js, Vue.js, QuickChart*)
 
 #### Report requirements:
 
