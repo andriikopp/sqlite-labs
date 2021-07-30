@@ -79,6 +79,11 @@ if (isset($_GET['query']) && $_GET['query'] == 'orders') {
 
         <!-- Vue.js application -->
         <div id="app">
+            <!-- Display data visualization -->
+            <div v-if="chart">
+                <img v-bind:src="chart" />
+            </div>
+
             <!-- List orders -->
             <div class="alert alert-info" role="alert" v-for="order in orders">
                 <!-- Display orders data -->
@@ -98,12 +103,24 @@ if (isset($_GET['query']) && $_GET['query'] == 'orders') {
             // Axios.js request to the API endpoint
             axios.get('http://localhost:3000/php/index.php?query=orders')
                 .then(function(response) {
+                    // Prepare data for visualization
+                    const chartJSON = {
+                        type: 'bar',
+                        data: {
+                            labels: response.data.map(order => order.name),
+                            datasets: [{
+                                label: 'Customers',
+                                data: response.data.map(order => order.total)
+                            }]
+                        }
+                    };
 
                     // Vue.js application
                     const app = new Vue({
                         el: '#app',
                         data: {
-                            orders: response.data
+                            orders: response.data,
+                            chart: 'https://quickchart.io/chart?c=' + JSON.stringify(chartJSON)
                         }
                     });
                 })

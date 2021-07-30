@@ -32,6 +32,10 @@ After completing this practice assignments, students are expected to be able to 
 - [Lab 5. Use databases in PHP.](https://github.com/andriikopp/sqlite-labs#lab-5-use-databases-in-php) (*PHP, OOP, PDO, SQLite, HTML, Bootstrap, JavaScript, JSON, axios.js, Vue.js*)
 - [Lab 6. Use databases in NodeJS.](https://github.com/andriikopp/sqlite-labs#lab-6-use-databases-in-nodejs) (*NodeJS, SQLite, express, HTML, Bootstrap, JavaScript, JSON, axios.js, Vue.js*)
 
+**Data visualization**
+
+- [Lab 7. Append web pages with data visualizations.]() (*HTML, Bootstrap, JavaScript, JSON, axios.js, Vue.js, QuickChart*)
+
 #### Report requirements:
 
 - Briefly describe main steps of the work.
@@ -933,3 +937,69 @@ res.send(response);
 ```
 
 - Do other necessary changes to ```nodejs/orders.html``` in order to make the web page work properly (use previous laboratory works as the reference).
+
+## Lab 7. Append web pages with data visualizations.
+
+### Preparation.
+
+- Get familiar with [QuickChart](https://quickchart.io/documentation/).
+- Choose one of the created web pages to edit (```index.php``` used in this example).
+- Visualize data retured by at least 5 SQL SELECT queries written before, try to use different charts.
+
+See the example below:
+
+```html
+        <!-- Vue.js application -->
+        <div id="app">
+            <!-- Display data visualization -->
+            <div v-if="chart">
+                <img v-bind:src="chart" />
+            </div>
+
+            <!-- List orders -->
+            <div class="alert alert-info" role="alert" v-for="order in orders">
+                <!-- Display orders data -->
+                <h4 class="alert-heading">{{ order.name }}</h4>
+                <p><b>Address:</b> {{ order.address }}</p>
+                <hr>
+                <p class="mb-0"><b>Product:</b> {{ order.product }}, ${{ order.price }}</p>
+                <p class="mb-0"><b>Amount:</b> {{ order.amount }}</p>
+                <p class="mb-0"><b>Total:</b> ${{ order.total }}</p>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+        <script>
+            // Axios.js request to the API endpoint
+            axios.get('http://localhost:3000/php/index.php?query=orders')
+                .then(function(response) {
+                    // Prepare data for visualization
+                    const chartJSON = {
+                        type: 'bar',
+                        data: {
+                            labels: response.data.map(order => order.name),
+                            datasets: [{
+                                label: 'Customers',
+                                data: response.data.map(order => order.total)
+                            }]
+                        }
+                    };
+
+                    // Vue.js application
+                    const app = new Vue({
+                        el: '#app',
+                        data: {
+                            orders: response.data,
+                            chart: 'https://quickchart.io/chart?c=' + JSON.stringify(chartJSON)
+                        }
+                    });
+                })
+                .catch(function(error) {
+                    alert(error);
+                });
+        </script>
+```
+
+- Separate chart preparation JavaScript code from the main application.
