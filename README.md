@@ -23,7 +23,7 @@ After completing this practice assignments, students are expected to be able to 
 
 - [Lab 3. Create simple database Web API.](https://github.com/andriikopp/sqlite-labs#lab-3-create-simple-database-web-api) (*Python, Flask, SQLite, DML SQL, JSON*)
 
-**Frontend**
+**Python + Web + Frontend**
 
 - [Lab 4. Display database records on web pages.](https://github.com/andriikopp/sqlite-labs#lab-4-display-database-records-on-web-pages) (*Python, Flask, HTML, Bootstrap, JavaScript, JSON, axios.js, Vue.js*)
 
