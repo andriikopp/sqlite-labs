@@ -2,6 +2,8 @@
 
 For software engineering and computer science students.
 
+*Working examples are given in this repository as reference materials.*
+
 ### SQLite with Python
 
 - [Lab 0. Data modeling as code.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-0-data-modeling-as-code)

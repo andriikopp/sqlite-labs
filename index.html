@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Orders</title>
+</head>
+
+<body class="mb-2 mt-2 mr-2 ml-2">
+    <h1>Orders</h1>
+
+    <!-- Vue.js application -->
+    <div id="app">
+        <!-- List orders -->
+        <div class="alert alert-info" role="alert" v-for="order in orders">
+            <!-- Display orders data -->
+            <h4 class="alert-heading">{{ order[0] }}</h4>
+            <p><b>Address:</b> {{ order[1] }}</p>
+            <hr>
+            <p class="mb-0"><b>Product:</b> {{ order[2] }}, ${{ order[4] }}</p>
+            <p class="mb-0"><b>Amount:</b> {{ order[3] }}</p>
+            <p class="mb-0"><b>Total:</b> {{ order[5].toFixed(2) }}</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <script>
+        // Axios.js request to the API endpoint
+        axios.get('http://127.0.0.1:5000/orders')
+            .then(function(response) {
+
+                // Vue.js application
+                const app = new Vue({
+                    el: '#app',
+                    data: {
+                        orders: response.data
+                    }
+                })
+            })
+            .catch(function(error) {
+                alert(error);
+            });
+    </script>
+</body>
+
+</html>

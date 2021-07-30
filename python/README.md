@@ -4,6 +4,7 @@
 - [Lab 1. Learning essentials of DBMS.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-1-learning-essentials-of-dbms)
 - [Lab 2. Basic data manipulation commands of SQL.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-2-basic-data-manipulation-commands-of-sql)
 - [Lab 3. Create simple database Web API.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-3-create-simple-database-web-api)
+- [Lab 4. Display database records on web pages.]()
 
 ## Problem description.
 
@@ -379,7 +380,7 @@ conn.close()
 
 ### Preparation.
 
-- Install Flask web development framework for Python:
+- Install [Flask](https://flask.palletsprojects.com/en/2.0.x/) web development framework for Python:
 
 ```shell
 pip install Flask
@@ -457,6 +458,150 @@ When ```http://127.0.0.1:5000/orders``` visited, the following JSON response is 
 ### Implementation.
 
 Create and verify API endpoints for all of the previously written SQL SELECT queries:
+
+- Print a list of products deliveredby the supplier 1 (Ivanov I.I. PE) for the contract 1.
+- Print a list of products delivered by supplier 1 (Ivanov I.I. PE) between 9/1/1999 and 9/12/1999 (using “mm/dd/yyyy” dateformat).
+- Print a list of products supplied in September of 1999 with supplier name and supply date.
+- Print a list of contracts (number, date), total amount of the sup-plied products and total price for each contract (multiply and sum amount and price for each contract). The list should be sorted by contract numbers (ascending).
+- Print a list of contracts (number, date) with total price for each contract. The list should be sorted by total price for each contract. Records for which contract number is greater than 3 should be excluded from query results.
+- Print information about the largestproduct batch among allcon-tracts. Include information aboutsupplier, contract number, and date.
+- Print a list of suppliers (name and ID) that have not concluded any contracts.
+- Print a list of supplied product names with the average price per item (regardless of supplier).
+- Print a list of products (name, amount andprice, supplier) for which price per item is greater than average.
+- Print information about top five expensive products (name, price per item, supplier).
+- For each day of September 1999 define price of products delivered by each supplier (include only delivery days).
+- Create a list of contracts (only numbers), total amount of the supplied products, and total price for each contract. Print full names (last name, first name, and second name) of suppliers that are private entrepreneurs, as well as tax numbers of legal entities.
+- Define amounts of eachdeliveredproductbyeach supplier.
+- Print a list of contracts (number, date) and total price for each contract. The list should be sorted by total price for each contract. Exclude records for which the contract number is greater than a given value from the query result.
+- Create a list of products delivered by the suppliers 1 and 2 (“Interfruit” LLC).
+- Create a list of products supplied more than once.
+
+## Lab 4. Display database records on web pages.
+
+### Preparation.
+
+- Create the basic [Bootstrap template](https://getbootstrap.com/docs/4.4/getting-started/introduction/) in the ```index.html``` file.
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
+```
+
+- Remove ```<!-- Optional JavaScript -->``` part.
+- Reference ```axios.js``` and ```vue.js``` instead.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+```
+
+- Install Flask [CORS](https://developer.mozilla.org/ru/docs/Web/HTTP/CORS) module to enable using HTTP API.
+- Modify Web API headers:
+
+```python
+from flask import Flask
+from flask import jsonify
+from flask_cors import CORS
+
+import sqlite3
+
+
+app = Flask(__name__)
+
+CORS(app)
+
+# ...
+```
+
+### Experimenting with axios and Vue.
+
+- Get familiar with [axios](https://github.com/axios/axios) and [Vue](https://ru.vuejs.org/v2/guide/index.html) for web development.
+- Add respective HTML and JavaScript code to display result set of the **1st** SQL SELECT query written before - *Print a list of products deliveredby the supplier 1 (Ivanov I.I. PE) for the contract 1*.
+
+See the example below:
+
+```html
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Orders</title>
+</head>
+
+<body class="mb-2 mt-2 mr-2 ml-2">
+    <h1>Orders</h1>
+
+    <!-- Vue.js application -->
+    <div id="app">
+        <!-- List orders -->
+        <div class="alert alert-info" role="alert" v-for="order in orders">
+            <!-- Display orders data -->
+            <h4 class="alert-heading">{{ order[0] }}</h4>
+            <p><b>Address:</b> {{ order[1] }}</p>
+            <hr>
+            <p class="mb-0"><b>Product:</b> {{ order[2] }}, ${{ order[4] }}</p>
+            <p class="mb-0"><b>Amount:</b> {{ order[3] }}</p>
+            <p class="mb-0"><b>Total:</b> {{ order[5].toFixed(2) }}</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <script>
+        // Axios.js request to the API endpoint
+        axios.get('http://127.0.0.1:5000/orders')
+            .then(function(response) {
+
+                // Vue.js application
+                const app = new Vue({
+                    el: '#app',
+                    data: {
+                        orders: response.data
+                    }
+                })
+            })
+            .catch(function(error) {
+                alert(error);
+            });
+    </script>
+</body>
+
+</html>
+```
+
+- Open the web page in a browser to check the results.
+
+### Implementation.
+
+For each of the previously developed API endpoints create respective web pages using axios.js and vue.js to display database records:
 
 - Print a list of products deliveredby the supplier 1 (Ivanov I.I. PE) for the contract 1.
 - Print a list of products delivered by supplier 1 (Ivanov I.I. PE) between 9/1/1999 and 9/12/1999 (using “mm/dd/yyyy” dateformat).
