@@ -4,11 +4,26 @@ For software engineering and computer science students.
 
 *Working examples are given in this repository as reference materials.*
 
+**Data Modeling**
+
 - [Lab 0. Data modeling as code.](https://github.com/andriikopp/sqlite-labs#lab-0-data-modeling-as-code) (*PlantUML, Entity-Relationship modeling*)
+
+**Python + SQLite**
+
 - [Lab 1. Learning essentials of DBMS.](https://github.com/andriikopp/sqlite-labs#lab-1-learning-essentials-of-dbms) (*Python, SQLite, DDL SQL*)
 - [Lab 2. Basic data manipulation commands of SQL.](https://github.com/andriikopp/sqlite-labs#lab-2-basic-data-manipulation-commands-of-sql) (*Python, SQLite, DML SQL*)
+
+**Python + Web**
+
 - [Lab 3. Create simple database Web API.](https://github.com/andriikopp/sqlite-labs#lab-3-create-simple-database-web-api) (*Python, Flask, SQLite, DML SQL, JSON*)
+
+**Frontend**
+
 - [Lab 4. Display database records on web pages.](https://github.com/andriikopp/sqlite-labs#lab-4-display-database-records-on-web-pages) (*Python, Flask, CORS, HTML, CSS, JavaScript, Bootstrap, axios.js, Vue.js*)
+
+**Other languages + SQLite**
+
+...
 
 #### Report requirements:
 
@@ -577,7 +592,7 @@ See the example below:
             <hr>
             <p class="mb-0"><b>Product:</b> {{ order[2] }}, ${{ order[4] }}</p>
             <p class="mb-0"><b>Amount:</b> {{ order[3] }}</p>
-            <p class="mb-0"><b>Total:</b> {{ order[5].toFixed(2) }}</p>
+            <p class="mb-0"><b>Total:</b> ${{ order[5].toFixed(2) }}</p>
         </div>
     </div>
 
@@ -595,7 +610,7 @@ See the example below:
                     data: {
                         orders: response.data
                     }
-                })
+                });
             })
             .catch(function(error) {
                 alert(error);
@@ -607,6 +622,7 @@ See the example below:
 ```
 
 - Open the web page in a browser to check the results.
+- Separate HTML and JS code to follow best practices.
 
 ### Implementation.
 
@@ -628,3 +644,131 @@ For each of the previously developed API endpoints create respective web pages u
 - Print a list of contracts (number, date) and total price for each contract. The list should be sorted by total price for each contract. Exclude records for which the contract number is greater than a given value from the query result.
 - Create a list of products delivered by the suppliers 1 and 2 (“Interfruit” LLC).
 - Create a list of products supplied more than once.
+
+## Lab 5. Use databases in PHP.
+
+### Preparation.
+
+- In order to simplify development, it is recommended to use *Visual Studio Code with PHP Server extension*.
+- Create PHP script ```index.php```.
+
+### Experimenting with PDO.
+
+- Create the API endpoint to ask for the **1st** SQL SELECT query written before - *Print a list of products deliveredby the supplier 1 (Ivanov I.I. PE) for the contract 1*.
+
+See the example below:
+
+```php
+<?php
+
+class OrdersSQLite
+{
+    // path to SQLite database
+    const PATH_TO_SQLITE_FILE = '../python/lab.db';
+
+    private $pdo;
+
+    /**
+     * Returns connection object.
+     */
+    public function connect()
+    {
+        if ($this->pdo == null) {
+            $this->pdo = new \PDO("sqlite:" . OrdersSQLite::PATH_TO_SQLITE_FILE);
+        }
+
+        return $this->pdo;
+    }
+
+    /**
+     * Returns orders result set.
+     */
+    public function getOrders()
+    {
+        $stmt = $this->pdo->query('SELECT 
+                name, address, product, amount, price, (amount * price) AS total
+            FROM 
+                customer INNER JOIN customer_order 
+                    ON customer.id = customer_order.customer_id
+            ORDER BY 
+                price');
+
+        $orders = [];
+
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $orders[] = [
+                'name' => $row['name'],
+                'address' => $row['address'],
+                'product' => $row['product'],
+                'amount' => $row['amount'],
+                'price' => $row['price'],
+                'total' => $row['total']
+            ];
+        }
+
+        return $orders;
+    }
+}
+
+$orders = new OrdersSQLite;
+$orders->connect();
+
+// JSONify response
+header('Content-Type: application/json');
+
+echo json_encode($orders->getOrders());
+```
+
+### Completing the web page.
+
+- Make JSON response conditional depending on the GET HTTP parameter.
+- Close PHP tag and insert in the ```else``` body the content of ```index.html``` web page created earlier.
+
+```php
+# ...
+
+if (isset($_GET['query']) && $_GET['query'] == 'orders') {
+    $orders = new OrdersSQLite;
+    $orders->connect();
+
+    // JSONify response
+    header('Content-Type: application/json');
+
+    echo json_encode($orders->getOrders());
+} else {
+?>
+    <!doctype html>
+
+    <!-- ... -->
+<?php
+}
+```
+
+- Use actual PHP endpoint inside the ```axios.get()``` method:
+
+See the example below:
+
+```javascript
+// ...
+axios.get('http://localhost:3000/php/index.php?query=orders')
+// ...
+```
+
+- Edit the Vue.js rendering part to correspond responded JSON data:
+
+See the example below:
+
+```html
+<div id="app">
+    <!-- List orders -->
+    <div class="alert alert-info" role="alert" v-for="order in orders">
+        <!-- Display orders data -->
+        <h4 class="alert-heading">{{ order.name }}</h4>
+        <p><b>Address:</b> {{ order.address }}</p>
+        <hr>
+        <p class="mb-0"><b>Product:</b> {{ order.product }}, ${{ order.price }}</p>
+        <p class="mb-0"><b>Amount:</b> {{ order.amount }}</p>
+        <p class="mb-0"><b>Total:</b> ${{ order.total }}</p>
+    </div>
+</div>
+```
