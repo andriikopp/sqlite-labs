@@ -4,8 +4,6 @@ For software engineering and computer science students.
 
 *Working examples are given in this repository as reference materials.*
 
-### SQLite with Python
-
 - [Lab 0. Data modeling as code. (PlantUML, Entity-Relationship modeling)](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-0-data-modeling-as-code)
 - [Lab 1. Learning essentials of DBMS. (Python, SQLite, DDL SQL)](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-1-learning-essentials-of-dbms)
 - [Lab 2. Basic data manipulation commands of SQL. (Python, SQLite, DML SQL)](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-2-basic-data-manipulation-commands-of-sql)
