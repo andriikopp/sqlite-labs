@@ -7,6 +7,7 @@ For software engineering and computer science students.
 - [Lab 0. Data modeling as code.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-0-data-modeling-as-code)
 - [Lab 1. Learning essentials of DBMS.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-1-learning-essentials-of-dbms)
 - [Lab 2. Basic data manipulation commands of SQL.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-2-basic-data-manipulation-commands-of-sql)
+- [Lab 3. Create simple database Web API.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-3-create-simple-database-web-api)
 
 #### Report requirements:
 
