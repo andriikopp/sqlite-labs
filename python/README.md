@@ -57,7 +57,7 @@
 
 ## Lab 0. Data modeling as code.
 
-- Get familiar with the PlantUML [Entity-Relationship (ER) diagram](https://plantuml.com/class-diagram) syntax.
+- Get familiar with the PlantUML [Entity-Relationship (ER) diagram](https://plantuml.com/ie-diagram) syntax.
 - Build the data model of entities mentioned above using the PlantUML ER diagram [here](http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000).
 
 See the example below:
