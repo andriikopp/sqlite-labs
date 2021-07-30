@@ -1,4 +1,4 @@
-# Database labs for SQLite
+# SQLite Database Labs
 
 For software engineering and computer science students.
 
