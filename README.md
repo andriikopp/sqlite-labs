@@ -2,6 +2,8 @@
 
 For software engineering and computer science students.
 
+This set of laboratory works gives students basic understanding of the full lifecycle of database-driven applications from data modeling and database design to backend and frontend components development using demanding technologies, such as SQL, Python, PHP, NodeJS, HTML, JavaScript, Bootstrap, OOP, API, JSON, axios.js, Vue.js, and related concepts and tools.
+
 *Working examples are given in this repository as reference materials.*
 
 **Data Modeling**
@@ -29,7 +31,7 @@ For software engineering and computer science students.
 #### Report requirements:
 
 - Briefly describe main steps of the work.
-- Insert the source code and execution results.
+- Insert the source code snippets and execution results as screenshots.
 
 ## Problem description.
 
