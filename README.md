@@ -10,6 +10,7 @@ For software engineering and computer science students.
 - [Lab 1. Learning essentials of DBMS.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-1-learning-essentials-of-dbms)
 - [Lab 2. Basic data manipulation commands of SQL.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-2-basic-data-manipulation-commands-of-sql)
 - [Lab 3. Create simple database Web API.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-3-create-simple-database-web-api)
+- [Lab 4. Display database records on web pages.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-4-display-database-records-on-web-pages)
 
 #### Report requirements:
 
