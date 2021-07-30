@@ -29,6 +29,8 @@ def orders():
     for row in cursor:
         response.append(row)
 
+    conn.close()
+
     return jsonify(response)
 
 

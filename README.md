@@ -19,11 +19,12 @@ For software engineering and computer science students.
 
 **Frontend**
 
-- [Lab 4. Display database records on web pages.](https://github.com/andriikopp/sqlite-labs#lab-4-display-database-records-on-web-pages) (*Python, Flask, CORS, HTML, CSS, JavaScript, Bootstrap, axios.js, Vue.js*)
+- [Lab 4. Display database records on web pages.](https://github.com/andriikopp/sqlite-labs#lab-4-display-database-records-on-web-pages) (*Python, Flask, CORS, HTML, Bootstrap, JavaScript, axios.js, Vue.js*)
 
 **Other languages + SQLite**
 
-...
+- [Lab 5. Use databases in PHP.](https://github.com/andriikopp/sqlite-labs#lab-5-use-databases-in-php) (*PHP, OOP, PDO, SQLite, HTML, Bootstrap, JavaScript, axios.js, Vue.js*)
+- [Lab 6. Use databases in NodeJS.](https://github.com/andriikopp/sqlite-labs#lab-5-use-databases-in-nodejs) (*NodeJS, SQLite, express, HTML, Bootstrap, JavaScript, axios.js, Vue.js*)
 
 #### Report requirements:
 
@@ -466,6 +467,8 @@ def orders():
     for row in cursor:
         response.append(row)
 
+    conn.close()
+
     return jsonify(response)
 
 
@@ -649,10 +652,10 @@ For each of the previously developed API endpoints create respective web pages u
 
 ### Preparation.
 
-- In order to simplify development, it is recommended to use *Visual Studio Code with PHP Server extension*.
+- In order to simplify development, it is recommended to use *Visual Studio Code with [PHP Server](https://github.com/brapifra/vscode-phpserver) extension*.
 - Create PHP script ```index.php```.
 
-### Experimenting with PDO.
+### Experimenting with [PDO](https://www.php.net/manual/ru/book.pdo.php).
 
 - Create the API endpoint to ask for the **1st** SQL SELECT query written before - *Print a list of products deliveredby the supplier 1 (Ivanov I.I. PE) for the contract 1*.
 
@@ -772,3 +775,155 @@ See the example below:
     </div>
 </div>
 ```
+
+- Separate PHP API endpoint, JavaScript code, and HTML page to follow best practices.
+
+## Lab 6. Use databases in NodeJS.
+
+### Preparation.
+
+- Install SQLite module:
+
+```shell
+npm install sqlite3
+```
+
+### Experimenting with sqlite3 in NodeJS.
+
+- Create ```index.js``` file to place code that works with the SQLite database.
+
+See the example below:
+
+```javascript
+const sqlite3 = require('sqlite3').verbose();
+
+let db = new sqlite3.Database('../python/lab.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+        console.error(err.message);
+    }
+
+    console.log('Connected to the database.');
+});
+
+db.serialize(() => {
+    db.each(`SELECT 
+                name, address, product, amount, price, (amount * price) AS total
+            FROM 
+                customer INNER JOIN customer_order 
+                    ON customer.id = customer_order.customer_id
+            ORDER BY 
+                price`, (err, row) => {
+        if (err) {
+            console.error(err.message);
+        }
+
+        console.log(row);
+    });
+});
+
+db.close((err) => {
+    if (err) {
+        console.error(err.message);
+    }
+
+    console.log('Close the database connection.');
+});
+```
+
+When run this script using ```node index.js``` command, the following result is expected:
+
+```shell
+Connected to the database.
+{
+  name: 'Esther Q. Harris',
+  address: '2690 Central Avenue Rochelle Park, NJ 07662',
+  product: 'CERAMIC fork',
+  amount: 10,
+  price: 2.99,
+  total: 29.900000000000002
+}
+...
+```
+
+### Transforming to a web application.
+
+- Install the ```express``` web development [module](https://expressjs.com/ru/starter/installing.html):
+
+```shell
+npm install express
+```
+
+- Create the API endpoint to ask for the **1st** SQL SELECT query written before - *Print a list of products deliveredby the supplier 1 (Ivanov I.I. PE) for the contract 1*.
+
+See the example below:
+
+```javascript
+const sqlite3 = require('sqlite3').verbose();
+const express = require('express')
+
+const app = express()
+const port = 3001
+
+app.get('/orders', (req, res) => {
+    let response = [];
+
+    let db = new sqlite3.Database('../python/lab.db', sqlite3.OPEN_READWRITE, (err) => {
+        if (err) {
+            console.error(err.message);
+        }
+
+        console.log('Connected to the database.');
+    });
+
+    db.serialize(() => {
+        db.each(`SELECT 
+                name, address, product, amount, price, (amount * price) AS total
+            FROM 
+                customer INNER JOIN customer_order 
+                    ON customer.id = customer_order.customer_id
+            ORDER BY 
+                price`, (err, row) => {
+            if (err) {
+                console.error(err.message);
+            }
+
+            response.push(row);
+        });
+    });
+
+    db.close((err) => {
+        if (err) {
+            console.error(err.message);
+        }
+
+        console.log('Close the database connection.');
+
+        res.send(response);
+    });
+});
+
+app.listen(port, () => {
+    console.log(`Serving at http://localhost:${port}`)
+});
+```
+
+When ```http://127.0.0.1:3001/orders``` visited, the following JSON response is expected:
+
+```json
+[{"name":"Esther Q. Harris","address":"2690 Central Avenue Rochelle Park, NJ 07662","product":"CERAMIC fork","amount":10,"price":2.99,"total":29.900000000000002},{"name":"Jennie M. Burns","address":"4007 Poplar Street Tinley Park, IL 60477","product":"FLEXIBLE mail sorter","amount":4,"price":29.99,"total":119.96},{"name":"Charles M. Smith","address":"4166 Stuart Street Gibsonia, PA 15044","product":"PLASTER coat hanger","amount":3,"price":49.99,"total":149.97},{"name":"Jennie M. Burns","address":"4007 Poplar Street Tinley Park, IL 60477","product":"FABRIC bike seat","amount":1,"price":199.99,"total":199.99}]
+```
+
+- Create the ```nodejs/orders.html``` web page and copy there content of ```index.html``` used before.
+- Enable CORS for the created NodeJS endpoint.
+
+See the example below:
+
+```javascript
+// ...
+res.setHeader('Access-Control-Allow-Origin', '*');
+res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+
+res.send(response);
+```
+
+- Do other necessary changes to ```nodejs/orders.html``` in order to make the web page work properly (use previous laboratory works as the reference).
