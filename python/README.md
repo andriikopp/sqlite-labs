@@ -1,10 +1,10 @@
 # SQLite with Python
 
-- [Lab 0. Data modeling as code.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-0-data-modeling-as-code)
-- [Lab 1. Learning essentials of DBMS.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-1-learning-essentials-of-dbms)
-- [Lab 2. Basic data manipulation commands of SQL.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-2-basic-data-manipulation-commands-of-sql)
-- [Lab 3. Create simple database Web API.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-3-create-simple-database-web-api)
-- [Lab 4. Display database records on web pages.](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-4-display-database-records-on-web-pages)
+- [Lab 0. Data modeling as code. (PlantUML, Entity-Relationship modeling)](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-0-data-modeling-as-code)
+- [Lab 1. Learning essentials of DBMS. (Python, SQLite, DDL SQL)](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-1-learning-essentials-of-dbms)
+- [Lab 2. Basic data manipulation commands of SQL. (Python, SQLite, DML SQL)](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-2-basic-data-manipulation-commands-of-sql)
+- [Lab 3. Create simple database Web API. (Python, Flask, SQLite, DML SQL, JSON)](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-3-create-simple-database-web-api)
+- [Lab 4. Display database records on web pages. (Python, Flask, CORS, HTML, CSS, JavaScript, Bootstrap, axios.js, Vue.js)](https://github.com/andriikopp/sqlite-labs/tree/main/python#lab-4-display-database-records-on-web-pages)
 
 ## Problem description.
 
