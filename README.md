@@ -27,7 +27,7 @@ After completing this practice assignments, students are expected to be able to 
 
 - [Lab 4. Display database records on web pages.](https://github.com/andriikopp/sqlite-labs#lab-4-display-database-records-on-web-pages) (*Python, Flask, HTML, Bootstrap, JavaScript, JSON, axios.js, Vue.js*)
 
-**Other languages + SQLite**
+**Other languages + SQLite + Web + Frontend**
 
 - [Lab 5. Use databases in PHP.](https://github.com/andriikopp/sqlite-labs#lab-5-use-databases-in-php) (*PHP, OOP, PDO, SQLite, HTML, Bootstrap, JavaScript, JSON, axios.js, Vue.js*)
 - [Lab 6. Use databases in NodeJS.](https://github.com/andriikopp/sqlite-labs#lab-6-use-databases-in-nodejs) (*NodeJS, SQLite, express, HTML, Bootstrap, JavaScript, JSON, axios.js, Vue.js*)
