@@ -19,15 +19,15 @@ After completing this practice assignments, students are expected to be able to 
 - [Lab 1. Learning essentials of DBMS.](https://github.com/andriikopp/sqlite-labs#lab-1-learning-essentials-of-dbms) (*Python, SQLite, DDL SQL*)
 - [Lab 2. Basic data manipulation commands of SQL.](https://github.com/andriikopp/sqlite-labs#lab-2-basic-data-manipulation-commands-of-sql) (*Python, SQLite, DML SQL*)
 
-**Python + Web**
+**Python + SQLite + Web**
 
 - [Lab 3. Create simple database Web API.](https://github.com/andriikopp/sqlite-labs#lab-3-create-simple-database-web-api) (*Python, Flask, SQLite, DML SQL, JSON*)
 
-**Python + Web + Frontend**
+**Python + SQLite + Web + Frontend**
 
 - [Lab 4. Display database records on web pages.](https://github.com/andriikopp/sqlite-labs#lab-4-display-database-records-on-web-pages) (*Python, Flask, HTML, Bootstrap, JavaScript, JSON, axios.js, Vue.js*)
 
-**Other languages + SQLite + Web + Frontend**
+**Other technologies + SQLite + Web + Frontend**
 
 - [Lab 5. Use databases in PHP.](https://github.com/andriikopp/sqlite-labs#lab-5-use-databases-in-php) (*PHP, OOP, PDO, SQLite, HTML, Bootstrap, JavaScript, JSON, axios.js, Vue.js*)
 - [Lab 6. Use databases in NodeJS.](https://github.com/andriikopp/sqlite-labs#lab-6-use-databases-in-nodejs) (*NodeJS, SQLite, express, HTML, Bootstrap, JavaScript, JSON, axios.js, Vue.js*)
