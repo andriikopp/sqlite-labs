@@ -178,7 +178,7 @@ conn.execute('''
 ''')
 ```
 
-- Create records in a database tables.
+- Create records in database tables.
 
 **Suppliers**
 
