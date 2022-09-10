@@ -137,3 +137,56 @@ WHERE
     AND `status` = 'Not rented'
 ORDER BY
     price DESC;
+
+--- DB1 Task No. 3
+--- Zoo
+DROP TABLE IF EXISTS animals;
+
+DROP TABLE IF EXISTS countries;
+
+CREATE TABLE countries (
+    id INT,
+    country VARCHAR(32),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE animals (
+    `name` VARCHAR(32),
+    `type` VARCHAR(32),
+    country_id INT,
+    PRIMARY KEY (`name`),
+    FOREIGN KEY (country_id) REFERENCES countries(id)
+);
+
+INSERT INTO
+    countries (id, country)
+VALUES
+    (1, 'USA'),
+    (2, 'Canada'),
+    (3, 'India');
+
+INSERT INTO
+    animals (`name`, `type`, country_id)
+VALUES
+    ('Candy', 'Elephant', 3),
+    ('Pop', 'Horse', 1),
+    ('Mike', 'Bear', 2),
+    ('Merlin', 'Lion', 1),
+    ('Bert', 'Tiger', 3);
+
+--- #1
+INSERT INTO
+    animals (`name`, `type`, country_id)
+VALUES
+    ('Slim', 'Giraffe', 1);
+
+--- #2
+SELECT
+    animals.`name`,
+    animals.`type`,
+    countries.country
+FROM
+    animals
+    INNER JOIN countries ON countries.id = animals.country_id
+ORDER BY
+    countries.country ASC;
