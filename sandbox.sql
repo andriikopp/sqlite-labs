@@ -190,3 +190,109 @@ FROM
     INNER JOIN countries ON countries.id = animals.country_id
 ORDER BY
     countries.country ASC;
+
+--- DB1 Task No. 4
+--- 1
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    `login` VARCHAR(64),
+    `password` VARCHAR(32) NOT NULL,
+    PRIMARY KEY (`login`)
+);
+
+INSERT INTO
+    users (`login`, `password`)
+VALUES
+    ('login1', '123456'),
+    ('login2', '654321'),
+    ('login3', 'abc456'),
+    ('login4', '123def'),
+    ('login5', 'abcdef');
+
+SELECT
+    *
+FROM
+    users
+LIMIT
+    3;
+
+--- 2
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    `login` VARCHAR(100),
+    `password` VARCHAR(100)
+);
+
+INSERT INTO
+    users (`login`, `password`)
+VALUES
+    ('login1', '123456'),
+    ('login2', '654321'),
+    ('login3', 'abc456'),
+    ('login4', '123def'),
+    ('login5', 'abcdef');
+
+SELECT
+    rowid,
+    `login`,
+    `password`
+FROM
+    users;
+
+--- 3
+DROP TABLE IF EXISTS students;
+
+CREATE TABLE students (
+    `name` VARCHAR(100),
+    age INT,
+    UNIQUE(`name`)
+);
+
+INSERT INTO
+    students (`name`, age)
+VALUES
+    ('Andrew', 29),
+    ('Paul', 19),
+    ('Jane', 20),
+    ('Mark', 27),
+    ('John', 24);
+
+SELECT
+    *
+FROM
+    students
+WHERE
+    age < 21
+ORDER BY
+    `name` ASC;
+
+--- 4
+DROP TABLE IF EXISTS customers;
+
+CREATE TABLE customers (
+    `name` VARCHAR(100),
+    balance DECIMAL(8, 2),
+    city VARCHAR(50),
+    UNIQUE(`name`)
+);
+
+INSERT INTO
+    customers (`name`, balance, city)
+VALUES
+    ('John', 500, 'NY'),
+    ('Paul', 1500, 'NJ'),
+    ('Mary', 900, 'NY'),
+    ('Rick', 2000, 'LA'),
+    ('Fred', 0, 'NY');
+
+SELECT
+    *
+FROM
+    customers
+WHERE
+    balance > 1000
+    OR city = 'NY'
+LIMIT
+    2;
