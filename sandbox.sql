@@ -296,3 +296,130 @@ WHERE
     OR city = 'NY'
 LIMIT
     2;
+
+--- 5
+DROP TABLE IF EXISTS zoo1;
+
+DROP TABLE IF EXISTS zoo2;
+
+CREATE TABLE zoo1 (
+    animal VARCHAR(32),
+    age INT,
+    UNIQUE(animal)
+);
+
+CREATE TABLE zoo2 (
+    animal VARCHAR(32),
+    age INT,
+    UNIQUE(animal)
+);
+
+INSERT INTO
+    zoo1 (animal, age)
+VALUES
+    ('bear', 10),
+    ('bird', 2),
+    ('lion', 7),
+    ('crocodile', 4);
+
+INSERT INTO
+    zoo2 (animal, age)
+VALUES
+    ('bear', 10),
+    ('bird', 2),
+    ('lion', 7),
+    ('crocodile', 4);
+
+SELECT
+    age
+FROM
+    zoo1
+WHERE
+    animal = 'bear'
+UNION
+SELECT
+    age
+FROM
+    zoo2
+WHERE
+    animal = 'lion';
+
+--- 6
+DROP TABLE IF EXISTS customers;
+
+CREATE TABLE customers (
+    `name` VARCHAR(100),
+    city VARCHAR(50),
+    UNIQUE(`name`)
+);
+
+INSERT INTO
+    customers (`name`, city)
+VALUES
+    ('Paul', 'LA'),
+    ('Mike', 'NY'),
+    ('Mary', 'NY'),
+    ('Jack', 'NJ'),
+    ('John', 'LA');
+
+SELECT
+    `name` || ' is from ' || city
+FROM
+    customers;
+
+--- 7
+DROP TABLE IF EXISTS zoo;
+
+CREATE TABLE zoo (
+    `type` VARCHAR(30),
+    age INT,
+    UNIQUE(`type`)
+);
+
+INSERT INTO
+    zoo (`type`, age)
+VALUES
+    ('Lion', 8),
+    ('Bear', 12),
+    ('Turtle', 7),
+    ('Elephant', 14),
+    ('Crocodile', 5);
+
+SELECT
+    *
+FROM
+    zoo
+WHERE
+    age > (
+        SELECT
+            AVG(age)
+        FROM
+            zoo
+    );
+
+--- 8
+DROP TABLE IF EXISTS zoo;
+
+CREATE TABLE zoo (
+    animal VARCHAR(50),
+    age INT,
+    UNIQUE (animal)
+);
+
+INSERT INTO
+    zoo (animal, age)
+VALUES
+    ('Black wolf', 4),
+    ('White wolf', 5),
+    ('Elephant', 12),
+    ('Turtle', 7),
+    ('Lucky wolf', 6),
+    ('Bear', 12),
+    ('Little wolf', 3);
+
+SELECT
+    age
+FROM
+    zoo
+WHERE
+    animal LIKE '%wolf';
